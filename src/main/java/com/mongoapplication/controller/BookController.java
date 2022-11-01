@@ -1,7 +1,7 @@
-package com.mongoapplication;
+package com.mongoapplication.controller;
 
-import com.mongoapplication.dao.BookRepository;
 import com.mongoapplication.entity.Book;
+import com.mongoapplication.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,25 +12,15 @@ import java.util.List;
 public class BookController {
 
     @Autowired
-    private BookRepository repository;
+    private BookService service;
 
     @PutMapping("/save")
     public Book saveBook(@RequestBody Book book) {
-        try {
-            return repository.save(book);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
+        return service.saveBook(book);
     }
 
     @GetMapping("/allBooks")
     public List<Book> getAllBooks() {
-        try {
-            return repository.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
+        return service.findAllBooks();
     }
 }
