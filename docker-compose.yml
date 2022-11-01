@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - mongo-data:/var/lib/mongo
+      - /etc/localtime:/etc/localtime
+
+volumes:
+  mongo-data: {}
+
+networks:
+  dev-network:
+    driver: bridge
